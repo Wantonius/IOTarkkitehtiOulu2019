@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <syslog.h>
+#include <errno.h>
+#include <string.h>
 
 #define LOG_LEVEL LOG_ERR
 #define DAEMON_NAME "My test daemon"
@@ -14,12 +16,14 @@ void daemonize(void) {
 	pid_t pid;
 
 	pid = fork();
+
+	// pid > 0 looks for parent. Exit parent to create daemon!
 	if(pid > 0) {
 		printf("Parent in daemonize, exiting!\n");
 		exit(EXIT_SUCCESS);
 	}
 	if(setsid() < 0) {
-		printf("Failed to create a new session. Exiting\n");
+		printf("Error:%s\n",strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	if(chdir("/") < 0) {
@@ -31,9 +35,10 @@ void daemonize(void) {
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
 }
+
 int main(int argc, char **argv) {
 	int i;
-	pid_t pid,ppid;
+	pid_t pid ,ppid;
 
 	pid = getpid();
 	ppid = getppid();
