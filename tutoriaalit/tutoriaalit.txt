@@ -1,0 +1,31 @@
+Linux tutoriaalit:
+Ubuntu tutorial (auttaa jos termit on hukassa):
+https://www.tutorialspoint.com/ubuntu/index.htm
+
+Command line for beginners:
+https://tutorials.ubuntu.com/tutorial/command-line-for-beginners
+
+Javascript tutoriaalit:
+https://www.w3schools.com/js/
+
+https://javascript.info/
+
+Python tutoriaalit:
+https://www.w3schools.com/python/
+
+https://www.learnpython.org/
+
+NodeJS tutoriaalit:
+https://www.w3schools.com/nodejs/
+
+https://www.tutorialspoint.com/nodejs/index.htm
+
+https://nodejs.org/en/ <- Nodejs kotisivu
+
+C-tutoriaalit (Janne opastaa to klo 10):
+https://www.learn-c.org/
+
+https://www.tutorialspoint.com/cprogramming/index.htm
+
+
+
