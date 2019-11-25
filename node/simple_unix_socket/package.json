@@ -1,0 +1,17 @@
+{
+  "name": "simple unix socket",
+  "version": "1.0.0",
+  "description": "hello world with express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "erno",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
