@@ -1,0 +1,35 @@
+Labrapäivät 14-15 ja 18.11
+
+Sensoridaemon:
+
+Luodaan daemon, joka generoi sekunnin välein lämpötiladataa arpomalla sopivia
+lämpötiloja. Daemon tallentaa nämä tiedot json-tyylisenä data.json tiedostoon. 
+Muista laittaa daemonin write append-moodiin.
+esim:
+{
+	temp:<arvo tähän>
+}, (MUISTA TUO PILKKU!)
+
+Luodaan toinen ohjelma, joka lukee arvot tiedostosta ja printtaa ne printf komennolla
+sellaisenaan.
+
+Luodaan nodejs palvelin, jossa on kolmen routen API ja joka palvelee webbisivua kuten
+hello-esimerkki. 
+
+API:
+
+"/start" -> demoni lähtee käyntiin ja demonin pid otetaan talteen. Käytä process.execiä.
+"/stop" -> demoni pysäytetään. aja "kill -9 <pid>". Käytä process.execiä.
+"/data" -> haetaan data tiedostosta process.execin avulla. Palauta data taulukkona eli "["+data+"]"
+(res.status(200).json("["+data+"]");)
+
+
+Webbisivulla on start ja stop napit (voi olla sama nappi, joka muistaa kummassa moodissa ollaan) ja 
+get data-nappi. Lisäksi sivulla on paikka datalle. Data näytetään kun se on haettu
+
+Bonus:
+Luo dynaaminen table datalle. Esimerkki tablen luonnista dynaamisesti javascriptalla
+https://www.aspsnippets.com/Articles/Create-dynamic-Table-in-HTML-at-runtime-using-JavaScript.aspx
+
+Luo sivulle ensin <div>, jolle annat id:n. Hae elementti id:n avulla ja laita sen innerHTML:ään tuo table kokonaisuudessaan.
+
