@@ -3,7 +3,9 @@ const process = require("child_process");
 
 let app = express();
 
-app.get("/", function(req,res) {
+app.use(express.static("public"));
+
+app.get("/hello", function(req,res) {
 	let proc = process.exec("./hello", function(error, stdout, stderr) {
 		if(error) {
 			console.log("Failed to spawn child process. Error:",error);
