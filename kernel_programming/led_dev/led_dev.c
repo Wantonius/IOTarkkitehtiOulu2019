@@ -125,7 +125,7 @@ static ssize_t led_store(struct device *dev, struct device_attribute *attr, cons
 		blinking = 1;
 		my_work = (struct blinking_work *)kzalloc(sizeof(struct blinking_work),GFP_KERNEL);
 		if(my_work == NULL) {
-			printk(KERN_ALERT "Can't reserve memory of work\n");
+			printk(KERN_ALERT "Can't reserve memory for work\n");
 			blinking = 0;
 			return count;
 		}
