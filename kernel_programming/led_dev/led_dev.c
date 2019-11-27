@@ -131,7 +131,7 @@ static ssize_t led_store(struct device *dev, struct device_attribute *attr, cons
 		}
 		INIT_DELAYED_WORK((struct delayed_work *)my_work, &blinking_work_function);
 		my_work->data = ticks;
-		queue_delayed_work(my_wq, (struct delayed_work *)my_work, 100);
+		queue_delayed_work(my_wq, (struct delayed_work *)my_work, ticks);
 	}
 	return count;	
 }
@@ -153,7 +153,7 @@ void blinking_work_function(struct work_struct *work) {
 		led_on = 0;
 	}
 	gpio_set_value(LED_GPIO,led_on);
-	queue_delayed_work(my_wq, (struct delayed_work *)my_work,100);
+	queue_delayed_work(my_wq, (struct delayed_work *)my_work,my_work->data);
 }
 
 MODULE_LICENSE("GPL");
