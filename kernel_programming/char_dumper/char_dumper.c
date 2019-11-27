@@ -77,15 +77,40 @@ void my_exit(void) {
 }
 
 int my_open(struct inode *inode, struct file *fp) {
+	struct my_dev *device;
+	printk(KERN_DEBUG "Opening char_dumper\n");
+	device = container_of(inode->i_cdev, struct my_dev, cdev);
+	fp->private_data = device;
+	if(device->connections == 0) {
+		printk(KERN_DEBUG "Reserving memory for buffer\n");
+		device->data_buffer = (char *)kmalloc(sizeof(char),GFP_KERNEL);
+	}
+	device->connections++;
 	return 0;
 }
 
 int my_close(struct inode *inode, struct file *fp) {
+	struct my_dev *device;
+	device = fp->private_data;
+	device->connections--;
+	printk(KERN_DEBUG "Closing char_dumper\n");
+	if(device->connections == 0) {
+		printk(KERN_DEBUG "Closing for the last time, freeing memory\n");
+		kfree(device->data_buffer);
+	}
 	return 0;
 }
 
 ssize_t my_read(struct file *fp, char __user *to, size_t count, loff_t *position) {
-	return 0;
+	struct my_dev *device;
+	int n;
+	printk(KERN_DEBUG "Reading for %d bytes\n",(int)count);
+	device = fp->private_data;
+	n = copy_to_user(to, device->data_buffer+*position,count);
+	*position = *position + (loff_t)count;
+	printk(KERN_DEBUG "Failed to read %d bytes\n",n);
+	printk(KERN_DEBUG "Currently in position %d\n",(int)*position);
+	return count-n;
 }
 
 
